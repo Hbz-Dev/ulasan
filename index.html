@@ -205,10 +205,11 @@ if (userHasVoted) {
   emoticons.forEach(emoticon => {
     emoticon.addEventListener('click', () => {
       const reaction = emoticon.getAttribute('data-value');
-      console.log(reaction)
       // Simpan status "sudah voting" di localStorage
+      sendReactionToTelegram(reaction);
     //   sessionStorage.setItem('sudahVote', true);
-
+   
+  
       // Tampilkan modal setelah user memilih emoticon
       giftMessage.textContent = getRandomGift();
       modal.style.display = "block";
@@ -232,6 +233,26 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+async function sendReactionToTelegram(reaction) {
+      const token = '5895624172:AAEThJdRxoWD3WiD6lG-ji1sF9dGu4XDSb0'; // Ganti dengan token bot Telegram kamu
+      const chatId = '1656207882'; // Ganti dengan ID chat atau grup Telegram kamu
+
+      const message = `Pengguna memberikan reaksi: ${reaction}`;
+
+      const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          console.log('Pesan berhasil dikirim ke Telegram');
+        } else {
+          console.error('Gagal mengirim pesan ke Telegram');
+        }
+      } catch (error) {
+        console.error('Terjadi kesalahan:', error);
+      }
+    }
+    
 
   </script>
 </body>
