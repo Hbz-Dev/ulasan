@@ -207,7 +207,7 @@ if (userHasVoted) {
       const reaction = emoticon.getAttribute('data-value');
       // Simpan status "sudah voting" di localStorage
       sendReactionToTelegram(reaction);
-    //   sessionStorage.setItem('sudahVote', true);
+      sessionStorage.setItem('sudahVote', true);
    
   
       // Tampilkan modal setelah user memilih emoticon
